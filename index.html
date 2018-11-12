@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<form>
+<input id="sno" type="text" placeholder="serial number">
+<input id="name" type="text" placeholder="name">
+<input id="role" type="text" placeholder="role">
+<button id="add">Add</button>  
+</form>
+<b>S.no</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Name</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Role</b><br>
+<div>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDm4ui8wFFkmE_gwJ9Xz0lDl3kiqwDrhsI",
+    authDomain: "cricketerslist.firebaseapp.com",
+    databaseURL: "https://cricketerslist.firebaseio.com",
+    projectId: "cricketerslist",
+    storageBucket: "",
+    messagingSenderId: "832208378662"
+  };
+  firebase.initializeApp(config);
+  
+ 
+ var ref = firebase.database().ref();
+
+ $("#add").click(function(){
+     name =  $("#name").val();
+     role = $("#role").val();
+     sno = $("#sno").val();
+   ref.child(sno).set({
+     name,role,sno
+   }); 
+ });  
+ 
+ref.on("value", function(snapshot) {
+  for(var i = 1; i < snapshot.val().length ; i++)
+  {
+      $("div").append("<i>"+snapshot.val()[i].sno+"</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>"+snapshot.val()[i].name+"</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>"+snapshot.val()[i].role+"</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class='fa fa-edit' onclick=update("+snapshot.val()[i].sno+",\""+snapshot.val()[i].name+"\",\""+snapshot.val()[i].role+"\")></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class='fa fa-trash' onclick=deletion("+snapshot.val()[i].sno+")></button><br><br>");
+  }
+}, function (error) {
+   console.log("Error: " + error.code);
+});  
+   
+function update(id, cname, crole){
+  $("#sno").css("border","1px solid blue");
+  $('#sno').attr('readonly', true);
+  $("#name").css("border","1px solid blue");
+  $("#role").css("border","1px solid blue");
+  $("#add").css("background-color","skyblue");
+  $("#sno").val(id);
+  $("#name").val(cname);
+  $("#role").val(crole);
+  sn = $("#sno").val(id);
+  nam = $("#name").val(cname);
+  rol = $("#role").val(crole);
+  $("#add").html("Update");    
+   ref.child(id).update({
+     sno,nam,rol
+   }); 
+ }
+  
+  function deletion(id){ 
+   ref.child(id).remove();
+   alert(id+" removed");
+ } 
+  
+</script>
