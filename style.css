@@ -1,0 +1,66 @@
+body{
+  background : url("http://p.imgci.com/db/PICTURES/CMS/168600/168685.jpg");
+  background-repeat : no-repeat;
+  background-size : cover;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size : 20px; 
+  color : orange;
+  box-sizing: border-box;
+}
+ ::placeholder {  
+  font-size : 20px; 
+  color : orange;
+}  
+#add {
+  width: 100%;
+  color: red;
+  padding: 14px 20px;
+  margin: 8px 0;
+  font-size: 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color : orange;
+}
+  
+.well {
+  border-radius: 5px;
+  background-color: lightgrey;
+  padding: 20px;
+}  
+
+label 
+  {
+    letter-spacing : 3px; 
+  }
+  table, td, tr, th, thead{
+    border : 1px solid grey;
+  }
+  th, label{
+    color : red;
+    font-size: 20px; 
+  }
+  td, input{
+    color : orange;
+    font-size: 20px; 
+  }
+  table{
+    width : 50%;
+    text-align : center;
+  }
+  td, th{
+    padding : 10px;  
+  }
+  h1{
+    text-align: center;
+    text-shadow : 1px 1px 1px red;
+    color : orange;
+  }
